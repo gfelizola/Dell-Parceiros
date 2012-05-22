@@ -1,0 +1,15 @@
+* {margin:0; padding:0; border:0; outline:none;}
+hr {display:none;}
+h1, h2, h3, h4, h5, h6 {font-size:100%;}
+html { overflow-y:scroll; font-size:100.01%;}
+
+body { height:100%; font-size:12px; font-family:"Museu for Dell 300", Arial; background:#0086c3; }
+
+body a {text-decoration:none;}
+body a:hover {text-decoration:underline;}
+
+body ul {float:left;}
+body ul li {float:left; list-style:none;}
+
+body form, body fieldset {float:left;}
+body fieldset legend {display:none;}

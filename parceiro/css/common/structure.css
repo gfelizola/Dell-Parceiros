@@ -1,0 +1,6 @@
+#site {width:730px; margin:0 auto; overflow:hidden;}
+
+#header { width:710px; height:150px; margin-left:8px; }
+#header h1 { width:213px; height:78px; background:url(../../img/common/logo.png) no-repeat left top transparent; }
+
+#content { width:100%; }
