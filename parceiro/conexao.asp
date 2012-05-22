@@ -55,6 +55,37 @@ ArrayPush Estados, "SE"
 ArrayPush Estados, "SP"
 ArrayPush Estados, "TO"
 
+Marcas = Array()
+ArrayPush Marcas, "HP"
+ArrayPush Marcas, "Lenovo"
+ArrayPush Marcas, "IBM"
+ArrayPush Marcas, "Positivo"
+ArrayPush Marcas, "Accer"
+ArrayPush Marcas, "Itautec"
+ArrayPush Marcas, "Apple"
+ArrayPush Marcas, "EMC"
+ArrayPush Marcas, "Microsoft"
+ArrayPush Marcas, "Oracle"
+ArrayPush Marcas, "SAP"
+ArrayPush Marcas, "Sun"
+ArrayPush Marcas, "Cisco"
+ArrayPush Marcas, "CA"
+
+Setores = Array()
+ArrayPush Setores, "Governo"
+ArrayPush Setores, "Educação"
+ArrayPush Setores, "Manufatura"
+ArrayPush Setores, "Finanças"
+ArrayPush Setores, "Oil & Gás"
+ArrayPush Setores, "Bem de consumo"
+ArrayPush Setores, "Outros"
+
+Faturamentos = Array()
+ArrayPush Faturamentos, "De R$ 100.000,00 a R$ 500.000,00"
+ArrayPush Faturamentos, "De R$ 500.000,00 a 1 milhão"
+ArrayPush Faturamentos, "De 1 milhão a 5 milhões"
+ArrayPush Faturamentos, "Mais de 5 milhões"
+
 TestServers = Array("localhost")
 CurrentServer = LCase( Request.ServerVariables("SERVER_NAME") )
 BaseFileName = "dell_parceiros.mdb"

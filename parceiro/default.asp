@@ -266,13 +266,13 @@ End IF
 							<label for="OutrasMarcasPositivo"><input 	type="checkbox" class="radiobutton" name="OutrasMarcas" id="OutrasMarcasPositivo" 		value="Positivo" /> 	Positivo</label>
 							<label for="OutrasMarcasAccer"><input 		type="checkbox" class="radiobutton" name="OutrasMarcas" id="OutrasMarcasHP" 			value="Accer" /> 		Accer</label>
 							<label for="OutrasMarcasItautec"><input 	type="checkbox" class="radiobutton" name="OutrasMarcas" id="OutrasMarcasItautec" 		value="Itautec" /> 		Itautec</label>
-							<label for="OutrasMarcasApple"><input 		type="checkbox" class="radiobutton" name="OutrasMarcas" id="OutrasMarcasApple" 		value="Apple" /> 		Apple</label>
+							<label for="OutrasMarcasApple"><input 		type="checkbox" class="radiobutton" name="OutrasMarcas" id="OutrasMarcasApple" 			value="Apple" /> 		Apple</label>
 							<label for="OutrasMarcasEMC"><input 		type="checkbox" class="radiobutton" name="OutrasMarcas" id="OutrasMarcasEMC" 			value="EMC" /> 			EMC</label>
-							<label for="OutrasMarcasMicrosoft"><input 	type="checkbox" class="radiobutton" name="OutrasMarcas" id="OutrasMarcasMicrosoft" 	value="Microsoft" /> 	Microsoft</label>
+							<label for="OutrasMarcasMicrosoft"><input 	type="checkbox" class="radiobutton" name="OutrasMarcas" id="OutrasMarcasMicrosoft" 		value="Microsoft" /> 	Microsoft</label>
 							<label for="OutrasMarcasOracle"><input 		type="checkbox" class="radiobutton" name="OutrasMarcas" id="OutrasMarcasOracle" 		value="Oracle" /> 		Oracle</label>
 							<label for="OutrasMarcasSAP"><input 		type="checkbox" class="radiobutton" name="OutrasMarcas" id="OutrasMarcasSAP" 			value="SAP" /> 			SAP</label>
 							<label for="OutrasMarcasSun"><input 		type="checkbox" class="radiobutton" name="OutrasMarcas" id="OutrasMarcasSun" 			value="Sun" /> 			Sun</label>
-							<label for="OutrasMarcasCisco"><input 		type="checkbox" class="radiobutton" name="OutrasMarcas" id="OutrasMarcasCisco" 		value="Cisco" /> 		Cisco</label>
+							<label for="OutrasMarcasCisco"><input 		type="checkbox" class="radiobutton" name="OutrasMarcas" id="OutrasMarcasCisco" 			value="Cisco" /> 		Cisco</label>
 							<label for="OutrasMarcasCA"><input 			type="checkbox" class="radiobutton" name="OutrasMarcas" id="OutrasMarcasCA" 			value="CA" /> 			CA</label>
 						</fieldset>
 						

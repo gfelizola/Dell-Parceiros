@@ -67,6 +67,21 @@ ArrayPush Marcas, "Toshiba"
 ArrayPush Marcas, "Microsoft"
 ArrayPush Marcas, "Outros"
 
+Setores = Array()
+ArrayPush Setores, "Governo"
+ArrayPush Setores, "Educação"
+ArrayPush Setores, "Manufatura"
+ArrayPush Setores, "Finanças"
+ArrayPush Setores, "Oil & Gás"
+ArrayPush Setores, "Bem de consumo"
+ArrayPush Setores, "Outros"
+
+Infras = Array()
+ArrayPush Infras, "Desktops"
+ArrayPush Infras, "Notebooks"
+ArrayPush Infras, "Servidores"
+ArrayPush Infras, "Storages"
+
 TestServers = Array("localhost")
 CurrentServer = LCase( Request.ServerVariables("SERVER_NAME") )
 BaseFileName = "dell_clientes.mdb"

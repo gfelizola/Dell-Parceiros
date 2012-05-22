@@ -1,6 +1,6 @@
 <%
 Response.ContentType = "application/vnd.ms-excel;"
-Response.AddHeader "content-disposition" , "attachment;filename=planilha_dell_parceiros_" & year(now) & "_" & month(now) & "_" & day(now) & ".xls"
+Response.AddHeader "content-disposition" , "attachment;filename=planilha_dell_clientes_" & year(now) & "_" & month(now) & "_" & day(now) & ".xls"
 Response.Charset = "utf-8"
 
 %>
@@ -31,57 +31,199 @@ Response.Write "</xml>"
 Response.Write "<![endif]--> "
 Response.Write "</head>"
 Response.Write "<body>"
-Response.Write "<table boder='1'>"
 %>
-    <TR>
-		<% For i = 0 to RS.fields.count - 1 %>
-        <TD><strong><%= Replace( ucase(RS(i).name), "'", "") %></strong></TD>
-        <% next %>
-		<TD><strong>CONTATO 1</strong></TD>
-		<TD><strong>CONTATO 2</strong></TD>
-		<TD><strong>CONTATO 3</strong></TD>
+	<table border="1" bordercolor="#FFFFFF">
+	
+	<TR>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232" align="center" colspan="<%=Ubound(Estados)+1%>" style="border-left-width:4px;border-right-width:4px;"><font color="#FFFFFF"><strong>Localização das Filiais</strong></font></TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232" align="center" colspan="<%=Ubound(Setores)+1%>"><font color="#FFFFFF"><strong>Setor Foco</strong></font></TD>
+		<%
+		For Each Infra In Infras
+			Response.Write("<TD bgcolor='#9e3232'>&nbsp;</TD>")
+			Response.Write("<TD bgcolor='#9e3232' align='center' colspan='" & (Ubound(Marcas)+1) & "'><font color='#FFFFFF'><strong>Marcas</strong></font></TD>")
+		Next
+		%>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
     </TR>
-    <% Do Until RS.eof %>
-        <TR>
-			<% 
-			For i = 0 to RS.fields.count - 1
-				If RS(i).name = "Empresa" Then
-					SQL = "SELECT * FROM Empresas WHERE Codigo = " & RS(i)
-					Set RSE = Conexao.execute(SQL,3)
-					
-					Response.Write("<TD VALIGN=TOP>" & RSE("nome") & "</TD>")
-					
-					RSE.Close
-					Set RSE = Nothing
+	
+	
+    <TR>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>id</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>account_party_id</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>account</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>CNPJ</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Cidade</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Estado</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>A empresa tem setor de TI?</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Contato 1</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Telefone 1</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>E-mail 1</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Contato 2</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Telefone 2</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>E-mail 2</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Contato 3</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Telefone 3</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>E-mail 3</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>A Empresa faz Parte de algum grupo?</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Qual Grupo?</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Quantidades de Filiais</strong></font></TD>
+		
+		<%
+		UFA = 1
+		For Each UF In Estados
+			borda = ""
+			If UFA = 1 Then borda = "style='border-left-width:4px;'"
+			If UFA = Ubound(Estados) + 1 Then borda = "style='border-right-width:4px;'"
+			
+			Response.Write("<TD bgcolor='#cf6969' " & borda & "><font color='#ffffff'><strong>" & UF & "</strong></font></TD>")
+			UFA = UFA + 1
+		Next
+		%>
+		
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Nº de Empregados</strong></font></TD>
+		
+		<%
+		For Each Setor In Setores
+			Response.Write("<TD bgcolor='#cf6969'><font color='#ffffff'><strong>" & Setor & "</strong></font></TD>")
+		Next
+		
+		For Each Infra In Infras
+			Response.Write("<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Quantidade de " & Infra & "</strong></font></TD>")
+			For Each Mar In Marcas
+				Response.Write("<TD bgcolor='#cf6969'><font color='#ffffff'><strong>" & Mar & "</strong></font></TD>")
+			Next
+		Next
+		%>
+		
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Tem previsão de compra no setor de TI?</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Prazo</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Gostaria de receber contato da Dell?</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Data de Cadastro</strong></font></TD>
+    </TR>
+    <% 
+	Do Until RS.eof 
+		Response.Write "<tr>"
+		Response.Write "<td bgcolor='#b8cce4'>" & RS("Codigo") & "</td>"
+		Response.Write "<td bgcolor='#b8cce4'>&nbsp;</td>"
+		
+		SQL = "SELECT * FROM Empresas WHERE Codigo = " & RS("Empresa")
+		Set RSE = Conexao.execute(SQL,3)
+		
+		Response.Write("<TD bgcolor='#b8cce4' VALIGN=TOP>" & RSE("Nome") & "</TD>")
+		
+		RSE.Close
+		Set RSE = Nothing
+		
+		Response.Write "<td bgcolor='#b8cce4'>" & RS("CNPJ") & "</td>"
+		Response.Write "<td bgcolor='#b8cce4'>" & RS("Cidade") & "</td>"
+		Response.Write "<td bgcolor='#b8cce4'>" & RS("Estado") & "</td>"
+		Response.Write "<td bgcolor='#b8cce4'>" & RS("SetorTecnologia") & "</td>"
+		
+		SQL = "SELECT * FROM Contatos WHERE Codigo_Cadastro = " & RS("Codigo")
+		Set RSE = Conexao.execute(SQL,3)
+		
+		QtdeContatos = 0 
+		
+		Do Until RS.eof 
+			Response.Write("<TD bgcolor='#b8cce4' VALIGN=TOP>" & RSE("Nome") & " " & RSE("Sobrenome") & "</TD>")
+			Response.Write("<TD bgcolor='#b8cce4' VALIGN=TOP>" & RSE("Telefone") & "</TD>")
+			Response.Write("<TD bgcolor='#b8cce4' VALIGN=TOP>" & RSE("Email") & "</TD>")
+			RSE.MoveNext
+			
+			QtdeContatos = QtdeContatos + 1
+		Loop
+		
+		RSE.Close
+		Set RSE = Nothing
+		
+		For i = QtdeContatos To 3
+			Response.Write "<TD bgcolor='#b8cce4' VALIGN=TOP>&nbsp;</TD>"
+			Response.Write "<TD bgcolor='#b8cce4' VALIGN=TOP>&nbsp;</TD>"
+			Response.Write "<TD bgcolor='#b8cce4' VALIGN=TOP>&nbsp;</TD>"
+		Next
+		
+		Response.Write "<td bgcolor='#b8cce4'>" & RS("ParticipaGrupo") & "</td>"
+		Response.Write "<td bgcolor='#b8cce4'>" & RS("Grupo") & "</td>"
+		Response.Write "<td bgcolor='#b8cce4'>" & RS("QtdeFiliais") & "</td>"
+		
+		UFA = 1
+		
+		EstadosFiliais = RS("EstadosFiliais")
+		
+		For Each UF In Estados
+			borda = ""
+			If UFA = 1 Then borda = "style='border-left-width:4px;'"
+			If UFA = Ubound(Estados) + 1 Then borda = "style='border-right-width:4px;'"
+		
+			If InStr( EstadosFiliais, UF ) > 0 Then
+				Response.Write("<TD bgcolor='#b8cce4' " & borda & ">SIM</TD>")
+			Else
+				Response.Write "<td bgcolor='#b8cce4' " & borda & ">&nbsp;</td>"
+			End IF
+			UFA = UFA + 1
+		Next
+		
+		Response.Write "<td bgcolor='#b8cce4'>" & RS("QtdeFuncionarios") & "</td>"
+		
+		SetorFoco = RS("SetorFoco")
+		
+		For Each Setor In Setores
+			If InStr( UCase(SetorFoco), UCase(Setor) ) > 0 Then
+				Response.Write("<TD bgcolor='#b8cce4'>SIM</TD>")
+			Else
+				Response.Write "<td bgcolor='#b8cce4'>&nbsp;</td>"
+			End IF
+		Next
+		
+		For Each Infra In Infras
+			QtdeInfra = RS("Qtde" & Infra)
+			MarcasInfra = RS("Marcas" & Infra)
+		
+			For Each Mar In Marcas
+				If InStr( UCase(MarcasInfra), UCase(Mar) ) > 0 Then
+					Response.Write("<TD bgcolor='#b8cce4'>SIM</TD>")
 				Else
-				%>
-                <TD VALIGN=TOP><%= RS(i)%></TD>
-            	<% 
-				End If
-			Next 
-			
-			StrContatos = ""
-			SQL = "SELECT * FROM Contatos WHERE Codigo_Cadastro = " & RS("Codigo")
-			Set RSF = Conexao.execute(SQL,3)
-			
-			Do Until RSF.Eof
-				Response.Write "<td>" & RSF("Nome") & " " & RSF("Sobrenome") & "<br>" & RSF("Telefone") & "<br>" & RSF("Email") & "</td>"
-				RSF.MoveNext
-			Loop
-			
-			RSF.Close
-			Set RSF = Nothing
-			%>
-        </TR>
-    <%
-    RS.MoveNext
-    
+					Response.Write "<td bgcolor='#b8cce4'>&nbsp;</td>"
+				End IF
+			Next
+		Next
+		
+		Response.Write "<td bgcolor='#b8cce4'>" & RS("PrevisaoCompras") & "</td>"
+		Response.Write "<td bgcolor='#b8cce4'>" & RS("PrazoInvestimento") & "</td>"
+		Response.Write "<td bgcolor='#b8cce4'>" & RS("QuerContato") & "</td>"
+		Response.Write "<td bgcolor='#b8cce4'>" & RS("DataCadastro") & "</td>"
+		
+		Response.Write "</tr>"
+	
+		RS.MoveNext
     Loop
     
     RS.Close
     Conexao.close
-    %>
-<%
+
 Response.Write "</table>"
 Response.Write "</body>"
 Response.Write "</html>"
