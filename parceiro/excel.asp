@@ -46,10 +46,9 @@ Response.Write "<body>"
 		<TD bgcolor="#538ed5">&nbsp;</TD>
 		<TD bgcolor="#538ed5">&nbsp;</TD>
 		<TD bgcolor="#538ed5">&nbsp;</TD>
-		<TD bgcolor="#538ed5" align="center" colspan="<%=Ubound(Estados)+1%>" style="border-left-width:4px;"><font color="#FFFFFF"><strong>Estados das Filiais</strong></font></TD>
+		<TD bgcolor="#538ed5" align="center" colspan="<%=Ubound(Estados)+1%>" style="border-left-width:4px;"><font color="#FFFFFF"><strong>Qtde de filiais por Estado</strong></font></TD>
 		<TD bgcolor="#538ed5" align="center" colspan="<%=Ubound(Estados)+1%>" style="border-left-width:4px;"><font color="#FFFFFF"><strong>Estados de Atendimento</strong></font></TD>
 		<TD bgcolor="#538ed5" align="center" colspan="7"><font color="#FFFFFF"><strong>Setor Foco</strong></font></TD>
-		<TD bgcolor="#538ed5">&nbsp;</TD>
 		<TD bgcolor="#538ed5">&nbsp;</TD>
 		<TD bgcolor="#538ed5">&nbsp;</TD>
 		<TD bgcolor="#538ed5">&nbsp;</TD>
@@ -60,8 +59,8 @@ Response.Write "<body>"
 		<TD bgcolor="#538ed5">&nbsp;</TD>
 		<TD bgcolor="#538ed5">&nbsp;</TD>
 		<TD bgcolor="#538ed5">&nbsp;</TD>
+		<TD bgcolor="#538ed5" align="center" colspan="<%=Ubound(Marcas)+1%>"><font color="#FFFFFF"><strong>Marcas Comercializadas </strong></font></TD>
 		<TD bgcolor="#538ed5">&nbsp;</TD>
-		<TD bgcolor="#538ed5" align="center" colspan="<%=Ubound(Marcas)%>"><font color="#FFFFFF"><strong>Marcas Comercializadas </strong></font></TD>
 		<TD bgcolor="#538ed5">&nbsp;</TD>
     </TR>
     <TR>
@@ -196,7 +195,7 @@ Response.Write "<body>"
 			If UFA = 1 Then borda = "style='border-left-width:4px;'"
 		
 			If InStr( OutrosEstados, UF ) > 0 Then
-				Response.Write("<TD bgcolor='#b8cce4' " & borda & ">SIM</TD>")
+				Response.Write("<TD bgcolor='#b8cce4' " & borda & ">X</TD>")
 			Else
 				Response.Write "<td bgcolor='#b8cce4' " & borda & ">&nbsp;</td>"
 			End IF
@@ -207,7 +206,7 @@ Response.Write "<body>"
 		
 		For Each Setor In Setores
 			If InStr( UCase(SetorFoco), UCase(Setor) ) > 0 Then
-				Response.Write("<TD bgcolor='#b8cce4'>SIM</TD>")
+				Response.Write("<TD bgcolor='#b8cce4'>X</TD>")
 			Else
 				Response.Write "<td bgcolor='#b8cce4'>&nbsp;</td>"
 			End IF
@@ -222,7 +221,7 @@ Response.Write "<body>"
 		
 		For Each Fat In Faturamentos
 			If InStr( UCase(Faturamento2011), UCase(Fat) ) > 0 Then
-				Response.Write("<TD bgcolor='#b8cce4'>SIM</TD>")
+				Response.Write("<TD bgcolor='#b8cce4'>X</TD>")
 			Else
 				Response.Write "<td bgcolor='#b8cce4'>&nbsp;</td>"
 			End IF
@@ -244,7 +243,7 @@ Response.Write "<body>"
 		
 		For Each Mar In Marcas
 			If InStr( UCase(OutrasMarcas), UCase(Mar) ) > 0 Then
-				Response.Write("<TD bgcolor='#b8cce4'>SIM</TD>")
+				Response.Write("<TD bgcolor='#b8cce4'>X</TD>")
 			Else
 				Response.Write "<td bgcolor='#b8cce4'>&nbsp;</td>"
 			End IF

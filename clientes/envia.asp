@@ -82,7 +82,7 @@ If QtdeF <> "0" Then
 		rs.AddNew
 		NomeB = AcertaCampo( "Nome" & i, "Nome" )
 		EmailB = AcertaCampo( "Email" & i, "Email" )
-		AcertaCampo "Sobrenome" & i, "Sobrenome"
+		AcertaCampo "Cargo" & i, "Cargo"
 		AcertaCampo "Telefone" & i, "Telefone"
 		
 		If Nome = "" Then Nome = NomeB

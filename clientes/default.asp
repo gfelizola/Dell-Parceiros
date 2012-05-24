@@ -92,12 +92,12 @@ End IF
 						<div class="contatos_template">
 							<div class="template">
 								<fieldset class="Contatos">
-									<label for="Nome$" class="cuf Nome">Nome do contato $</label>
+									<label for="Nome$" class="cuf Nome">Nome completo do contato $</label>
 									<input type="text" name="Nome$" id="Nome$" value="" title="" validate="required:true" />
 								</fieldset>
 								<fieldset class="Contatos">
-									<label for="Sobrenome$" class="cuf Sobrenome">Sobrenome</label>
-									<input type="text" name="Sobrenome$" id="Sobrenome$" value="" title="" validate="required:true" />
+									<label for="Cargo$" class="cuf Cargo">Cargo</label>
+									<input type="text" name="Cargo$" id="Cargo$" value="" title="" validate="required:true" />
 								</fieldset>
 								<fieldset class="Contatos">
 									<label for="Email$" class="cuf Email">E-mail</label>
