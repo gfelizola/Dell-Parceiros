@@ -75,6 +75,8 @@ var Site = {
 	},
 	
 	Home: function(){
+		$('#Telefone').mask('(99) 9999-9999');
+		
 		camposHTML = $('.contatos_template').html() ;
 		$('.contatos_template').html('');
 		addContato();

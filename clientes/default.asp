@@ -119,7 +119,7 @@ End IF
 						</fieldset>
 						
 						<fieldset>
-							<label for="Grupo" class="cuf Grupo">Grupo</label>
+							<label for="Grupo" class="cuf Grupo">Nome do grupo</label>
 							<input type="text" name="Grupo" id="Grupo" value="" title="" validate="required:'#ParticipaGrupoSim:checked'" />
 						</fieldset>
 						
@@ -134,6 +134,9 @@ End IF
 								Next
 								%>
 							</select>
+						</fieldset><fieldset>
+							<label for="Telefone" class="cuf Telefone">Telefone da empresa</label>
+							<input type="text" name="Telefone" id="Telefone" value="" title="" validate="required:true" />
 						</fieldset>
 						
 						<fieldset class="simnao">
@@ -149,6 +152,11 @@ End IF
 						
 						<fieldset class="EstadosFiliais Outros">
 							<span class="cuf">Em quais estados estão as filiais:</span>
+							
+							<label for='EstadosFiliaisTodos' style="width:100%;">
+								<input type='checkbox' name='EstadosFiliais' id='EstadosFiliaisTodos' value='Brasil' class='radiobutton' />
+								Todos os estados do Brasil
+							</label><br />
 							<%
 							For Each UF In Estados
 								Response.Write("<label for='EstadosFiliais" & UF & "'>")
