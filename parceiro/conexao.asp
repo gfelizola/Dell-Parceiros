@@ -56,6 +56,7 @@ ArrayPush Estados, "SP"
 ArrayPush Estados, "TO"
 
 Marcas = Array()
+ArrayPush Marcas, "Dell"
 ArrayPush Marcas, "HP"
 ArrayPush Marcas, "Lenovo"
 ArrayPush Marcas, "IBM"

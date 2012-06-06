@@ -6,7 +6,7 @@ rs.CursorLocation = 3
 rs.CursorType = 1
 rs.LockType = 3
 
-SQL = "SELECT e.nome as Nome, e.codigo as Codigo FROM Empresas as e, Cadastros as c WHERE e.codigo <> c.empresa ORDER BY nome"
+SQL = "SELECT DISTINCT e.nome as Nome, e.codigo as Codigo FROM Empresas as e, Cadastros as c WHERE e.codigo <> c.empresa ORDER BY nome"
 rs.Open SQL , Conexao, 1, 2
 
 If rs.RecordCount = 0 Then
@@ -89,13 +89,13 @@ End IF
 						</fieldset>
 						
 						<fieldset>
-							<label for="Email" class="cuf Email">E-mail</label>
-							<input type="text" name="Email" id="Email" value="" title="" validate="required:true,email:true" />
+							<label for="Telefone" class="cuf Telefone">Telefone</label>
+							<input type="text" name="Telefone" id="Telefone" value="" title="" validate="required:true" />
 						</fieldset>
 						
 						<fieldset>
-							<label for="Cargo" class="cuf Cargo">Cargo</label>
-							<input type="text" name="Cargo" id="Cargo" value="" title="" validate="required:true" />
+							<label for="Email" class="cuf Email">E-mail</label>
+							<input type="text" name="Email" id="Email" value="" title="" validate="required:true,email:true" />
 						</fieldset>
 						
 						<fieldset>
@@ -115,21 +115,73 @@ End IF
 							</select>
 						</fieldset>
 						
+						<fieldset>
+							<label for="QtdeFiliais" class="cuf QtdeFiliais">Quantas filiais a empresa possui?</label>
+							<input type="text" name="QtdeFiliais" id="QtdeFiliais" value="" title="" validate="required:true" />
+						</fieldset>
+						
 						<fieldset class="Filiais">
-							<label class="cuf">Quantas filiais a empresa possui e em que estados elas estão localizadas?</label>
+							<span class="cuf">Quais são os estados das filiais?</span>
+							<label for='EstadosFiliaisTodos' style="width:100%;">
+								<input type='checkbox' name='EstadosFiliais' id='EstadosFiliaisTodos' value='Brasil' class='radiobutton' />
+								Todos os estados do Brasil
+							</label>
+							<!-- 
+							<label for='EstadosFiliaisNorte' class="regiao">
+								<input type='checkbox' name='EstadosFiliais' id='EstadosFiliaisNorte' value='Norte' class='radiobutton' />
+								Região Norte
+							</label>
+							<label for='EstadosFiliaisNordeste' class="regiao">
+								<input type='checkbox' name='EstadosFiliais' id='EstadosFiliaisNordeste' value='Nordeste' class='radiobutton' />
+								Região Nordeste
+							</label>
+							<label for='EstadosFiliaisCentroOeste' class="regiao">
+								<input type='checkbox' name='EstadosFiliais' id='EstadosFiliaisCentroOeste' value='Oeste' class='radiobutton' />
+								Região Centro-Oeste
+							</label>
+							<label for='EstadosFiliaisSudeste' class="regiao">
+								<input type='checkbox' name='EstadosFiliais' id='EstadosFiliaisSudeste' value='Sudeste' class='radiobutton' />
+								Região Sudeste
+							</label>
+							<label for='EstadosFiliaisSul' class="regiao">
+								<input type='checkbox' name='EstadosFiliais' id='EstadosFiliaisSul' value='Sul' class='radiobutton' />
+								Região Sul
+							</label>
+							-->
 							<%
 							For Each UF In Estados
-								Response.Write("<div><select name='Filiais" & UF & "' id='Filiais" & UF & "'>")
-								For i = 0 To 10
-									Response.Write("<option value='" & i & "'>" & i & "</option>")
-								Next
-								Response.Write("</select> " & UF & "</div>")
+								Response.Write("<label for='EstadosFiliais" & UF & "'>")
+								Response.Write("<input type='checkbox' name='EstadosFiliais' id='EstadosFiliais" & UF & "' value='" & UF & "' class='radiobutton' /> ")
+								Response.Write( UF & "</label>")
 							Next
 							%>
 						</fieldset>
 						
 						<fieldset class="Outros">
 							<span class="cuf">Estados que são atendidos, além de matriz e filiais?</span>
+							
+							<label for='OutrosEstadosNorte' class="regiao">
+								<input type='checkbox' name='OutrosEstados' id='OutrosEstadosNorte' value='Norte' class='radiobutton' />
+								Região Norte
+							</label>
+							<label for='OutrosEstadosSul' class="regiao">
+								<input type='checkbox' name='OutrosEstados' id='OutrosEstadosSul' value='Sul' class='radiobutton' />
+								Região Sul
+							</label>
+							<label for='OutrosEstadosNordeste' class="regiao">
+								<input type='checkbox' name='OutrosEstados' id='OutrosEstadosNordeste' value='Nordeste' class='radiobutton' />
+								Região Nordeste
+							</label>
+							<label for='OutrosEstadosCentroOeste' class="regiao">
+								<input type='checkbox' name='OutrosEstados' id='OutrosEstadosCentroOeste' value='Oeste' class='radiobutton' />
+								Região Centro-Oeste
+							</label>
+							<label for='OutrosEstadosTodos' class="regiao">
+								<input type='checkbox' name='OutrosEstados' id='OutrosEstadosTodos' value='Brasil' class='radiobutton' />
+								Todos os estados do Brasil
+							</label>
+							<label for='OutrosEstadosSul' class="regiao"></label>
+							
 							<%
 							For Each UF In Estados
 								Response.Write("<label for='OutrosEstados" & UF & "'>")
@@ -141,13 +193,13 @@ End IF
 						
 						<fieldset>
 							<span class="cuf SetorFoco">Setor foco:</span>
-							<label for="SetorFocoGoverno"><input type="radio" class="radiobutton" name="SetorFoco" id="SetorFocoGoverno" value="Governo" title="" validate="required:true" /> Governo</label>
-							<label for="SetorFocoEducacao"><input type="radio" class="radiobutton" name="SetorFoco" id="SetorFocoEducacao" value="Educação" /> Educação</label>
-							<label for="SetorFocoManufatura"><input type="radio" class="radiobutton" name="SetorFoco" id="SetorFocoManufatura" value="Manufatura" /> Manufatura</label>
-							<label for="SetorFocoFinancas"><input type="radio" class="radiobutton" name="SetorFoco" id="SetorFocoFinancas" value="Finanças" /> Finanças</label>
-							<label for="SetorFocoOil"><input type="radio" class="radiobutton" name="SetorFoco" id="SetorFocoOil" value="Oil & Gás" /> Oil & Gás</label>
-							<label for="SetorFocoBem"><input type="radio" class="radiobutton" name="SetorFoco" id="SetorFocoBem" value="Bem de consumo" /> Bem de consumo</label>
-							<label for="SetorFocoOutros"><input type="radio" class="radiobutton" name="SetorFoco" id="SetorFocoOutros" value="Outros" /> Outros</label>
+							<label for="SetorFocoGoverno"><input 		type="checkbox" class="radiobutton" name="SetorFoco" id="SetorFocoGoverno" value="Governo" title="" /> Governo</label>
+							<label for="SetorFocoEducacao"><input 		type="checkbox" class="radiobutton" name="SetorFoco" id="SetorFocoEducacao" value="Educação" /> Educação</label>
+							<label for="SetorFocoManufatura"><input 	type="checkbox" class="radiobutton" name="SetorFoco" id="SetorFocoManufatura" value="Manufatura" /> Manufatura</label>
+							<label for="SetorFocoFinancas"><input 		type="checkbox" class="radiobutton" name="SetorFoco" id="SetorFocoFinancas" value="Finanças" /> Finanças</label>
+							<label for="SetorFocoOil"><input 			type="checkbox" class="radiobutton" name="SetorFoco" id="SetorFocoOil" value="Oil & Gás" /> Oil & Gás</label>
+							<label for="SetorFocoBem"><input 			type="checkbox" class="radiobutton" name="SetorFoco" id="SetorFocoBem" value="Bem de consumo" /> Bem de consumo</label>
+							<label for="SetorFocoOutros"><input 		type="checkbox" class="radiobutton" name="SetorFoco" id="SetorFocoOutros" value="Outros" /> Outros</label>
 						</fieldset>
 						
 						<fieldset class="simnao">
@@ -185,12 +237,6 @@ End IF
 						<fieldset>
 							<span class="cuf NivelLinhas">Qual o nível de capacitação da equipe comercial com relação as linhas:</span>
 						</fieldset>
-						<fieldset class="nivel">
-							<span class="cuf">Linha Serviços:</span>
-							<label for="NivelServicosAlto"><input  type="radio" class="radiobutton" name="NivelServicos" id="NivelServicosAlto"  value="Alto" title="" validate="required:true" />  Alto</label>
-							<label for="NivelServicosMedio"><input type="radio" class="radiobutton" name="NivelServicos" id="NivelServicosMedio" value="Médio" /> Médio</label>
-							<label for="NivelServicosBaixo"><input type="radio" class="radiobutton" name="NivelServicos" id="NivelServicosBaixo" value="Baixo" /> Baixo</label>
-						</fieldset>
 						
 						<fieldset class="nivel">
 							<span class="cuf">Linha Client:</span>
@@ -207,17 +253,24 @@ End IF
 						</fieldset>
 						
 						<fieldset class="nivel">
-							<span class="cuf">Linha Software:</span>
-							<label for="NivelSoftwareAlto"><input  type="radio" class="radiobutton" name="NivelSoftware" id="NivelSoftwareAlto"  value="Alto" title="" validate="required:true" />  Alto</label>
-							<label for="NivelSoftwareMedio"><input type="radio" class="radiobutton" name="NivelSoftware" id="NivelSoftwareMedio" value="Médio" /> Médio</label>
-							<label for="NivelSoftwareBaixo"><input type="radio" class="radiobutton" name="NivelSoftware" id="NivelSoftwareBaixo" value="Baixo" /> Baixo</label>
-						</fieldset>
-						
-						<fieldset class="nivel">
 							<span class="cuf">Linha Servidores:</span>
 							<label for="NivelServidoresAlto"><input  type="radio" class="radiobutton" name="NivelServidores" id="NivelServidoresAlto"  value="Alto" title="" validate="required:true" />  Alto</label>
 							<label for="NivelServidoresMedio"><input type="radio" class="radiobutton" name="NivelServidores" id="NivelServidoresMedio" value="Médio" /> Médio</label>
 							<label for="NivelServidoresBaixo"><input type="radio" class="radiobutton" name="NivelServidores" id="NivelServidoresBaixo" value="Baixo" /> Baixo</label>
+						</fieldset>
+						
+						<fieldset class="nivel">
+							<span class="cuf">Linha Networking:</span>
+							<label for="NivelNetworkingAlto"><input  type="radio" class="radiobutton" name="NivelNetworking" id="NivelNetworkingAlto"  value="Alto" title="" validate="required:true" />  Alto</label>
+							<label for="NivelNetworkingMedio"><input type="radio" class="radiobutton" name="NivelNetworking" id="NivelNetworkingMedio" value="Médio" /> Médio</label>
+							<label for="NivelNetworkingBaixo"><input type="radio" class="radiobutton" name="NivelNetworking" id="NivelNetworkingBaixo" value="Baixo" /> Baixo</label>
+						</fieldset>
+						
+						<fieldset class="nivel">
+							<span class="cuf">Linha Software:</span>
+							<label for="NivelSoftwareAlto"><input  type="radio" class="radiobutton" name="NivelSoftware" id="NivelSoftwareAlto"  value="Alto" title="" validate="required:true" />  Alto</label>
+							<label for="NivelSoftwareMedio"><input type="radio" class="radiobutton" name="NivelSoftware" id="NivelSoftwareMedio" value="Médio" /> Médio</label>
+							<label for="NivelSoftwareBaixo"><input type="radio" class="radiobutton" name="NivelSoftware" id="NivelSoftwareBaixo" value="Baixo" /> Baixo</label>
 						</fieldset>
 						
 						<fieldset class="nivel">
@@ -228,10 +281,10 @@ End IF
 						</fieldset>
 						
 						<fieldset class="nivel">
-							<span class="cuf">Linha Networking:</span>
-							<label for="NivelNetworkingAlto"><input  type="radio" class="radiobutton" name="NivelNetworking" id="NivelNetworkingAlto"  value="Alto" title="" validate="required:true" />  Alto</label>
-							<label for="NivelNetworkingMedio"><input type="radio" class="radiobutton" name="NivelNetworking" id="NivelNetworkingMedio" value="Médio" /> Médio</label>
-							<label for="NivelNetworkingBaixo"><input type="radio" class="radiobutton" name="NivelNetworking" id="NivelNetworkingBaixo" value="Baixo" /> Baixo</label>
+							<span class="cuf">Linha Serviços:</span>
+							<label for="NivelServicosAlto"><input  type="radio" class="radiobutton" name="NivelServicos" id="NivelServicosAlto"  value="Alto" title="" validate="required:true" />  Alto</label>
+							<label for="NivelServicosMedio"><input type="radio" class="radiobutton" name="NivelServicos" id="NivelServicosMedio" value="Médio" /> Médio</label>
+							<label for="NivelServicosBaixo"><input type="radio" class="radiobutton" name="NivelServicos" id="NivelServicosBaixo" value="Baixo" /> Baixo</label>
 						</fieldset>
 						
 						<fieldset class="simnao">
@@ -259,7 +312,8 @@ End IF
 						</fieldset>
 						
 						<fieldset class="marcas">
-							<span class="cuf OutrasMarcas">Além de produtos Dell, quais marcas a sua empresa trabalha:</span>
+							<span class="cuf OutrasMarcas">Com quais marcas a empresa trabalha?</span>
+							<label for="OutrasMarcasDell"><input 		type="checkbox" class="radiobutton" name="OutrasMarcas" id="OutrasMarcasDell" 			value="Dell" /> 		Dell</label>
 							<label for="OutrasMarcasHP"><input 			type="checkbox" class="radiobutton" name="OutrasMarcas" id="OutrasMarcasHP" 			value="HP" /> 			HP</label>
 							<label for="OutrasMarcasLenovo"><input 		type="checkbox" class="radiobutton" name="OutrasMarcas" id="OutrasMarcasLenovo" 		value="Lenovo" /> 		Lenovo</label>
 							<label for="OutrasMarcasIBM"><input 		type="checkbox" class="radiobutton" name="OutrasMarcas" id="OutrasMarcasIBM" 			value="IBM" /> 			IBM</label>

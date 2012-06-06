@@ -57,6 +57,7 @@ Response.Write "<body>"
 		<TD bgcolor="#9e3232">&nbsp;</TD>
 		<TD bgcolor="#9e3232">&nbsp;</TD>
 		<TD bgcolor="#9e3232">&nbsp;</TD>
+		<TD bgcolor="#9e3232">&nbsp;</TD>
 		<TD bgcolor="#9e3232" align="center" colspan="<%=Ubound(Estados)+2%>" style="border-left-width:4px;border-right-width:4px;"><font color="#FFFFFF"><strong>Localização das Filiais</strong></font></TD>
 		<TD bgcolor="#9e3232">&nbsp;</TD>
 		<TD bgcolor="#9e3232" align="center" colspan="<%=Ubound(Setores)+1%>"><font color="#FFFFFF"><strong>Setor Foco</strong></font></TD>
@@ -84,6 +85,7 @@ Response.Write "<body>"
 		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Contato 1</strong></font></TD>
 		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Cargo 1</strong></font></TD>
 		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>E-mail 1</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>DDD 1</strong></font></TD>
 		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Telefone 1</strong></font></TD>
 		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Contato 2</strong></font></TD>
 		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Cargo 2</strong></font></TD>
@@ -161,10 +163,22 @@ Response.Write "<body>"
 			Response.Write("<TD bgcolor='#f6e2e2' VALIGN=TOP>" & RSE("Nome") & "</TD>")
 			Response.Write("<TD bgcolor='#f6e2e2' VALIGN=TOP>" & RSE("Cargo") & "</TD>")
 			Response.Write("<TD bgcolor='#f6e2e2' VALIGN=TOP>" & RSE("Email") & "</TD>")
-			Response.Write("<TD bgcolor='#f6e2e2' VALIGN=TOP>" & RSE("Telefone") & "</TD>")
+			
+			Telefone = RSE("Telefone")
+			
+			If QtdeContatos = 1 Then
+				TelSpl = Split(Telefone,")")
+				DDD = Right( TelSpl(0), 2 )
+				Telefone = TelSpl(1)
+				
+				Response.Write("<TD bgcolor='#f6e2e2' VALIGN=TOP>" & DDD & "</TD>")
+				Response.Write("<TD bgcolor='#f6e2e2' VALIGN=TOP>" & Telefone & "</TD>")
+			Else
+				Response.Write("<TD bgcolor='#f6e2e2' VALIGN=TOP>&nbsp;</TD>")
+				Response.Write("<TD bgcolor='#f6e2e2' VALIGN=TOP>" & Telefone & "</TD>")
+			End If
 			
 			RSE.MoveNext
-			
 			QtdeContatos = QtdeContatos + 1
 		Loop
 		

@@ -46,8 +46,8 @@ Response.Write "<body>"
 		<TD bgcolor="#538ed5">&nbsp;</TD>
 		<TD bgcolor="#538ed5">&nbsp;</TD>
 		<TD bgcolor="#538ed5">&nbsp;</TD>
-		<TD bgcolor="#538ed5" align="center" colspan="<%=Ubound(Estados)+1%>" style="border-left-width:4px;"><font color="#FFFFFF"><strong>Qtde de filiais por Estado</strong></font></TD>
-		<TD bgcolor="#538ed5" align="center" colspan="<%=Ubound(Estados)+1%>" style="border-left-width:4px;"><font color="#FFFFFF"><strong>Estados de Atendimento</strong></font></TD>
+		<TD bgcolor="#538ed5" align="center" colspan="<%=Ubound(Estados)+2%>" style="border-left-width:4px;"><font color="#FFFFFF"><strong>Estados da Filiais</strong></font></TD>
+		<TD bgcolor="#538ed5" align="center" colspan="<%=Ubound(Estados)+6%>" style="border-width:0 4px;"><font color="#FFFFFF"><strong>Estados de Atendimento</strong></font></TD>
 		<TD bgcolor="#538ed5" align="center" colspan="7"><font color="#FFFFFF"><strong>Setor Foco</strong></font></TD>
 		<TD bgcolor="#538ed5">&nbsp;</TD>
 		<TD bgcolor="#538ed5">&nbsp;</TD>
@@ -84,6 +84,9 @@ Response.Write "<body>"
 			Response.Write("<TD bgcolor='#376091' " & borda & "><font color='#ffffff'><strong>" & UF & "</strong></font></TD>")
 			UFA = UFA + 1
 		Next
+		%>
+		<TD bgcolor='#376091'><font color='#ffffff'><strong>Todos os estados do Brasil</strong></font></TD>
+		<%
 		UFA = 1
 		For Each UF In Estados
 			borda = ""
@@ -92,6 +95,12 @@ Response.Write "<body>"
 			UFA = UFA + 1
 		Next
 		%>
+		
+		<TD bgcolor='#376091'><font color='#ffffff'><strong>Região Norte</strong></font></TD>
+		<TD bgcolor='#376091'><font color='#ffffff'><strong>Região Sul</strong></font></TD>
+		<TD bgcolor='#376091'><font color='#ffffff'><strong>Região Nordeste</strong></font></TD>
+		<TD bgcolor='#376091'><font color='#ffffff'><strong>Região Centro-Oeste</strong></font></TD>
+		<TD bgcolor='#376091' style='border-right-width:4px;'><font color='#ffffff'><strong>Todos os estados do Brasil</strong></font></TD>
 		
 		<TD bgcolor='#376091'><font color='#ffffff'><strong>Governo</strong></font></TD>
 		<TD bgcolor='#376091'><font color='#ffffff'><strong>Educação</strong></font></TD>
@@ -131,7 +140,15 @@ Response.Write "<body>"
 		<TD bgcolor='#376091'><font color='#ffffff'><strong>Possui Site?</strong></font></TD>
 		<TD bgcolor='#376091'><font color='#ffffff'><strong>Data Cadastro</strong></font></TD>
     </TR>
-    <% 
+    <%
+	
+	ArrayPush Estados, "BRASIL"
+	ArrayPush Estados, "NORTE"
+	ArrayPush Estados, "NORDESTE"
+	ArrayPush Estados, "OESTE"
+	ArrayPush Estados, "SUDESTE"
+	'ArrayPush Estados, "SUL"
+	
 	Do Until RS.eof 
 		Response.Write "<tr>"
 		Response.Write "<td bgcolor='#b8cce4'>1</td>"
@@ -152,51 +169,61 @@ Response.Write "<body>"
 		Response.Write "<td bgcolor='#b8cce4'>&nbsp;</td>"
 		Response.Write "<td bgcolor='#b8cce4'>" & RS("QtdeFuncionarios") & "</td>"
 		Response.Write "<td bgcolor='#b8cce4'>" & RS("EstadoMatriz") & "</td>"
+		Response.Write "<td bgcolor='#b8cce4'>" & RS("QtdeFiliais") & "</td>"
 		
-		SQL = "SELECT SUM(Qtde) as Soma FROM Cadastro_Estados WHERE Cadastro = " & RS("Codigo")
-		Set RSE = Conexao.execute(SQL,3)
-		
-		Response.Write("<TD bgcolor='#b8cce4' VALIGN=TOP>" & RSE("Soma") & "</TD>")
-		
-		RSE.Close
-		Set RSE = Nothing
-		
-		Set RSE = Server.CreateObject("ADODB.Recordset")
-		RSE.CursorLocation = 3
-		RSE.CursorType = 1
-		RSE.LockType = 3
+		EstadosFiliais = RS("EstadosFiliais")
+		If Not IsNull( EstadosFiliais ) Then
+			EstadosSPL = Split(EstadosFiliais, ",")
+		Else
+			EstadosSPL = Array()
+		End IF
 		
 		UFA = 1
+		For i = 1 To 28
+			UF = Estados(i)
 		
-		For Each UF In Estados
-			SQL = "SELECT Qtde FROM Cadastro_Estados WHERE Estado = '" & UF & "' AND Cadastro = " & RS("Codigo")
-			RSE.Open SQL , Conexao, 1, 2
-			
 			borda = ""
 			If UFA = 1 Then borda = "style='border-left-width:4px;'"
+			If UFA = 29 Then borda = "style='border-right-width:4px;'"
 			
-			If RSE.RecordCount > 0 Then
-				Response.Write("<TD bgcolor='#b8cce4' " & borda & "><strong>" & RSe("Qtde") & "</strong></TD>")
-			Else
+			Achou = False
+			
+			For Each UFI In EstadosSPL
+				If UCase(Trim(UFI)) = UCase(UF) Then
+					Response.Write("<td bgcolor='#b8cce4' " & borda & ">X</td>")
+					Achou = True
+				End If
+			Next
+		
+			If Not Achou Then
 				Response.Write "<td bgcolor='#b8cce4' " & borda & ">&nbsp;</td>"
 			End IF
-			RSE.Close
 			UFA = UFA + 1
 		Next
 		
-		Set RSE = Nothing
-		
 		OutrosEstados = RS("OutrosEstados")
+		If Not IsNull( OutrosEstados ) Then
+			EstadosSPL = Split(OutrosEstados, ",")
+		Else
+			EstadosSPL = Array()
+		End IF
 		
 		UFA = 1
-		
 		For Each UF In Estados
 			borda = ""
 			If UFA = 1 Then borda = "style='border-left-width:4px;'"
+			If UFA = Ubound(Estados) + 1 Then borda = "style='border-right-width:4px;'"
+			
+			Achou = False
+			
+			For Each UFI In EstadosSPL
+				If UCase(Trim(UFI)) = UCase(UF) Then
+					Response.Write("<td bgcolor='#b8cce4' " & borda & ">X</td>")
+					Achou = True
+				End If
+			Next
 		
-			If InStr( OutrosEstados, UF ) > 0 Then
-				Response.Write("<TD bgcolor='#b8cce4' " & borda & ">X</TD>")
-			Else
+			If Not Achou Then
 				Response.Write "<td bgcolor='#b8cce4' " & borda & ">&nbsp;</td>"
 			End IF
 			UFA = UFA + 1

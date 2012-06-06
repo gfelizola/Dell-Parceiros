@@ -37,6 +37,8 @@ AcertaCampo "Empresa"
 AcertaCampo "Cargo"
 AcertaCampo "QtdeFuncionarios"
 AcertaCampo "EstadoMatriz"
+AcertaCampo "EstadosFiliais"
+AcertaCampo "QtdeFiliais"
 AcertaCampo "OutrosEstados"
 AcertaCampo "SetorFoco"
 AcertaCampo "PossuiVendas"
@@ -61,43 +63,13 @@ AcertaCampo "Site"
 rs.Fields("DataCadastro").Value = Now
 rs.Update
 
-Codigo = rs("codigo")
-
 rs.Close
-
-Set rsF = Server.CreateObject("ADODB.Recordset")
-rsF.CursorLocation = 3
-rsF.CursorType = 1
-rsF.LockType = 3
-
-SQL = "SELECT * FROM Cadastro_Estados"
-rsF.Open SQL , Conexao, 1, 2
-
-StrFiliais = ""
-StrOutros = ""
-
-For Each UF In Estados
-	QtdeF = Request.Form("Filiais" & UF)
-	
-	If QtdeF <> "0" Then
-		rsF.AddNew
-		rsF.Fields("Qtde").Value = QtdeF
-		rsF.Fields("Estado").Value = UF
-		rsF.Fields("Cadastro").Value = Codigo
-		
-		rsF.Update
-		
-		StrFiliais = StrFiliais & "Filiais em " &  UF& ": " & QtdeF & "<br>"
-	End IF
-Next
-
-Corpo = Corpo & StrFiliais & "<br>"
-
-rsF.Close
-Set rsF = Nothing
 
 Conexao.close
 Set Conexao = Nothing
+
+Response.Write Corpo
+Response.Flush()
 
 SET AspEmail = Server.CreateObject("Persits.MailSender")
 AspEmail.Host = "localhost"

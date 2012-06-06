@@ -17,7 +17,7 @@ h3.subtitulo { color:#004c6f; font-size:20px; margin-left:22px; }
 .form fieldset input, .form select { float:left; border:0; width:325px; height:28px; line-height:28px; color:#005982; background:#d9edf6; margin-left:5px; }
 
 .form #EstadoMatriz { width:100px; }
-.form .Filiais div { width:70px; height:18px; float:left; margin:5px 3px; }
+.form .Filiais label { width:70px; height:18px; float:left; margin:5px 3px; }
 .form .Filiais div select { width:40px; height:18px; margin-right:3px; }
 .form .Outros label { width:70px; height:18px; float:left; margin:5px 3px; }
 .form .Outros div select { width:40px; height:18px; margin-right:3px; }
@@ -27,6 +27,7 @@ h3.subtitulo { color:#004c6f; font-size:20px; margin-left:22px; }
 .form .nivel label { width:100%; color:#848484; }
 .form .nivel span { width:100%; color:#335a80; }
 .form .marcas label { width:100%; color:#848484; }
+.form label.regiao { width:222px; }
 
 .form #Enviar { margin:30px 50px 0 0; }
 
