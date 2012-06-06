@@ -125,7 +125,7 @@ If Err <> 0 Then
 	erro = erro & "<b>Erro.Source:</b> "      & Err.Source & "<br>"
 	RW erro
 Else
-    RW "<font color='blue'><b>Mensagem enviada com sucesso</b></font> "
+    'RW "<font color='blue'><b>Mensagem enviada com sucesso</b></font> "
 	Response.Redirect("default.asp?sucesso=true")
 End If
 

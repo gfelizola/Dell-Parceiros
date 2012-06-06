@@ -6,7 +6,7 @@ rs.CursorLocation = 3
 rs.CursorType = 1
 rs.LockType = 3
 
-SQL = "SELECT DISTINCT e.nome as Nome, e.codigo as Codigo FROM Empresas as e, Cadastros as c WHERE e.codigo <> c.empresa ORDER BY nome"
+SQL = "SELECT DISTINCT e.nome as Nome, e.codigo as Codigo FROM Empresas as e, Cadastros as c WHERE e.codigo NOT IN (SELECT empresa FROM Cadastros) ORDER BY nome;"
 rs.Open SQL , Conexao, 1, 2
 
 If rs.RecordCount = 0 Then
@@ -173,13 +173,13 @@ End IF
 						
 						<fieldset>
 							<span class="cuf SetorFoco">Setor foco:</span>
-							<label for="SetorFocoGoverno"><input type="radio" class="radiobutton" name="SetorFoco" id="SetorFocoGoverno" value="Governo" title="" validate="required:true" /> Governo</label>
-							<label for="SetorFocoEducacao"><input type="radio" class="radiobutton" name="SetorFoco" id="SetorFocoEducacao" value="Educação" /> Educação</label>
-							<label for="SetorFocoManufatura"><input type="radio" class="radiobutton" name="SetorFoco" id="SetorFocoManufatura" value="Manufatura" /> Manufatura</label>
-							<label for="SetorFocoFinancas"><input type="radio" class="radiobutton" name="SetorFoco" id="SetorFocoFinancas" value="Finanças" /> Finanças</label>
-							<label for="SetorFocoOil"><input type="radio" class="radiobutton" name="SetorFoco" id="SetorFocoOil" value="Oil & Gás" /> Oil & Gás</label>
-							<label for="SetorFocoBem"><input type="radio" class="radiobutton" name="SetorFoco" id="SetorFocoBem" value="Bem de consumo" /> Bem de consumo</label>
-							<label for="SetorFocoOutros"><input type="radio" class="radiobutton" name="SetorFoco" id="SetorFocoOutros" value="Outros" /> Outros</label>
+							<label for="SetorFocoGoverno"><input type="checkbox" class="radiobutton" name="SetorFoco" id="SetorFocoGoverno" value="Governo" title="" validate="required:true" /> Governo</label>
+							<label for="SetorFocoEducacao"><input type="checkbox" class="radiobutton" name="SetorFoco" id="SetorFocoEducacao" value="Educação" /> Educação</label>
+							<label for="SetorFocoManufatura"><input type="checkbox" class="radiobutton" name="SetorFoco" id="SetorFocoManufatura" value="Manufatura" /> Manufatura</label>
+							<label for="SetorFocoFinancas"><input type="checkbox" class="radiobutton" name="SetorFoco" id="SetorFocoFinancas" value="Finanças" /> Finanças</label>
+							<label for="SetorFocoOil"><input type="checkbox" class="radiobutton" name="SetorFoco" id="SetorFocoOil" value="Oil & Gás" /> Oil & Gás</label>
+							<label for="SetorFocoBem"><input type="checkbox" class="radiobutton" name="SetorFoco" id="SetorFocoBem" value="Bem de consumo" /> Bem de consumo</label>
+							<label for="SetorFocoOutros"><input type="checkbox" class="radiobutton" name="SetorFoco" id="SetorFocoOutros" value="Outros" /> Outros</label>
 						</fieldset>
 						
 						<fieldset class="simnao">
