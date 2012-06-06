@@ -1,7 +1,7 @@
 <%
-'Response.ContentType = "application/vnd.ms-excel;"
-'Response.AddHeader "content-disposition" , "attachment;filename=planilha_dell_clientes_" & year(now) & "_" & month(now) & "_" & day(now) & ".xls"
-'Response.Charset = "utf-8"
+Response.ContentType = "application/vnd.ms-excel;"
+Response.AddHeader "content-disposition" , "attachment;filename=planilha_dell_clientes_" & year(now) & "_" & month(now) & "_" & day(now) & ".xls"
+Response.Charset = "utf-8"
 
 %>
 <!-- #INCLUDE file="conexao.asp" -->
