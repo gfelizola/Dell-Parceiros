@@ -100,8 +100,6 @@ Set rs = Nothing
 Conexao.close
 Set Conexao = Nothing
 
-RW Corpo
-
 SET AspEmail = Server.CreateObject("Persits.MailSender")
 AspEmail.Host = "localhost"
 AspEmail.FromName = Nome

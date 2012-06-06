@@ -1,7 +1,7 @@
 <%
-Response.ContentType = "application/vnd.ms-excel;"
-Response.AddHeader "content-disposition" , "attachment;filename=planilha_dell_clientes_" & year(now) & "_" & month(now) & "_" & day(now) & ".xls"
-Response.Charset = "utf-8"
+'Response.ContentType = "application/vnd.ms-excel;"
+'Response.AddHeader "content-disposition" , "attachment;filename=planilha_dell_clientes_" & year(now) & "_" & month(now) & "_" & day(now) & ".xls"
+'Response.Charset = "utf-8"
 
 %>
 <!-- #INCLUDE file="conexao.asp" -->
@@ -80,12 +80,12 @@ Response.Write "<body>"
 		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>CNPJ</strong></font></TD>
 		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Cidade</strong></font></TD>
 		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Estado</strong></font></TD>
+		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>DDD</strong></font></TD>
 		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Telefone da empresa</strong></font></TD>
 		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>A empresa tem setor de TI?</strong></font></TD>
 		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Contato 1</strong></font></TD>
 		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Cargo 1</strong></font></TD>
 		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>E-mail 1</strong></font></TD>
-		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>DDD 1</strong></font></TD>
 		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Telefone 1</strong></font></TD>
 		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Contato 2</strong></font></TD>
 		<TD bgcolor='#cf6969'><font color='#ffffff'><strong>Cargo 2</strong></font></TD>
@@ -151,7 +151,17 @@ Response.Write "<body>"
 		Response.Write "<td bgcolor='#f6e2e2'>" & RS("CNPJ") & "</td>"
 		Response.Write "<td bgcolor='#f6e2e2'>" & RS("Cidade") & "</td>"
 		Response.Write "<td bgcolor='#f6e2e2'>" & RS("Estado") & "</td>"
-		Response.Write "<td bgcolor='#f6e2e2'>" & RS("Telefone") & "</td>"
+
+		DDD = ""
+		Telefone = RS("Telefone")
+		If Telefone <> "" Then
+			TelSpl = Split(Telefone,")")
+			DDD = Right( TelSpl(0), 2 )
+			Telefone = TelSpl(1)
+		End If
+		
+		Response.Write("<td bgcolor='#f6e2e2' VALIGN=TOP>" & DDD & "</td>")
+		Response.Write("<td bgcolor='#f6e2e2' VALIGN=TOP>" & Telefone & "</td>")
 		Response.Write "<td bgcolor='#f6e2e2'>" & RS("SetorTecnologia") & "</td>"
 		
 		SQL = "SELECT * FROM Contatos WHERE Codigo_Cadastro = " & RS("Codigo")
@@ -163,20 +173,7 @@ Response.Write "<body>"
 			Response.Write("<TD bgcolor='#f6e2e2' VALIGN=TOP>" & RSE("Nome") & "</TD>")
 			Response.Write("<TD bgcolor='#f6e2e2' VALIGN=TOP>" & RSE("Cargo") & "</TD>")
 			Response.Write("<TD bgcolor='#f6e2e2' VALIGN=TOP>" & RSE("Email") & "</TD>")
-			
-			Telefone = RSE("Telefone")
-			
-			If QtdeContatos = 1 Then
-				TelSpl = Split(Telefone,")")
-				DDD = Right( TelSpl(0), 2 )
-				Telefone = TelSpl(1)
-				
-				Response.Write("<TD bgcolor='#f6e2e2' VALIGN=TOP>" & DDD & "</TD>")
-				Response.Write("<TD bgcolor='#f6e2e2' VALIGN=TOP>" & Telefone & "</TD>")
-			Else
-				Response.Write("<TD bgcolor='#f6e2e2' VALIGN=TOP>&nbsp;</TD>")
-				Response.Write("<TD bgcolor='#f6e2e2' VALIGN=TOP>" & Telefone & "</TD>")
-			End If
+			Response.Write("<TD bgcolor='#f6e2e2' VALIGN=TOP>" & RSE("Telefone") & "</TD>")
 			
 			RSE.MoveNext
 			QtdeContatos = QtdeContatos + 1

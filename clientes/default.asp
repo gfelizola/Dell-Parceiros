@@ -6,7 +6,7 @@ rs.CursorLocation = 3
 rs.CursorType = 1
 rs.LockType = 3
 
-SQL = "SELECT e.nome as Nome, e.codigo as Codigo FROM Empresas as e, Cadastros as c WHERE e.codigo <> c.empresa ORDER BY nome"
+SQL = "SELECT DISTINCT e.nome as Nome, e.codigo as Codigo FROM Empresas as e, Cadastros as c WHERE e.codigo <> c.empresa ORDER BY nome"
 rs.Open SQL , Conexao, 1, 2
 
 If rs.RecordCount = 0 Then
