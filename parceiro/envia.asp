@@ -33,6 +33,7 @@ End Function
 Nome = AcertaCampo("Contato")
 Email = AcertaCampo("Email")
 
+AcertaCampo "Telefone"
 AcertaCampo "Empresa"
 AcertaCampo "Cargo"
 AcertaCampo "QtdeFuncionarios"
@@ -68,8 +69,8 @@ rs.Close
 Conexao.close
 Set Conexao = Nothing
 
-Response.Write Corpo
-Response.Flush()
+'Response.Write Corpo
+'Response.Flush()
 
 SET AspEmail = Server.CreateObject("Persits.MailSender")
 AspEmail.Host = "localhost"
@@ -96,7 +97,7 @@ If Err <> 0 Then
 	erro = erro & "<b>Erro.Source:</b> "      & Err.Source & "<br>"
 	Response.write erro
 Else
-    Response.write "<font color='blue'><b>Mensagem enviada com sucesso para</b></font> "
+    'Response.write "<font color='blue'><b>Mensagem enviada com sucesso para</b></font> "
 	Response.Redirect("default.asp?sucesso=true")
 End If
 

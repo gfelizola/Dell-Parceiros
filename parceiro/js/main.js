@@ -74,6 +74,8 @@ var Site = {
 	},
 	
 	Home: function(){
+		$('.MaskedTel').mask('(99) 9999-9999');
+		
 		jQuery.validator.messages.required = "";
 		jQuery.validator.messages.email = "";
 		

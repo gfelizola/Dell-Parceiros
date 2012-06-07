@@ -68,9 +68,9 @@ Response.Write "<body>"
 		<TD bgcolor='#376091'><font color='#ffffff'><strong>Id</strong></font></TD>
 		<TD bgcolor='#376091'><font color='#ffffff'><strong>Nome do parceiro</strong></font></TD>
 		<TD bgcolor='#376091'><font color='#ffffff'><strong>Estado</strong></font></TD>
-		<TD bgcolor='#376091'><font color='#ffffff'><strong>Telefone</strong></font></TD>
 		<TD bgcolor='#376091'><font color='#ffffff'><strong>Contato</strong></font></TD>
 		<TD bgcolor='#376091'><font color='#ffffff'><strong>E-mail</strong></font></TD>
+		<TD bgcolor='#376091'><font color='#ffffff'><strong>Telefone</strong></font></TD>
 		<TD bgcolor='#376091'><font color='#ffffff'><strong>Nível de Certificação</strong></font></TD>
 		<TD bgcolor='#376091'><font color='#ffffff'><strong>Nº de Funcionários</strong></font></TD>
 		<TD bgcolor='#376091'><font color='#ffffff'><strong>Estado da Matriz</strong></font></TD>
@@ -151,22 +151,26 @@ Response.Write "<body>"
 	
 	Do Until RS.eof 
 		Response.Write "<tr>"
-		Response.Write "<td bgcolor='#b8cce4'>1</td>"
-		Response.Write "<td bgcolor='#b8cce4'>" & RS("Codigo") & "</td>"
+		
 		
 		SQL = "SELECT * FROM Empresas WHERE Codigo = " & RS("Empresa")
 		Set RSE = Conexao.execute(SQL,3)
 		
+		Response.Write "<td bgcolor='#b8cce4'>" & RSE("Prioridade") & "</td>"
+		Response.Write "<td bgcolor='#b8cce4'>" & RSE("ID") & "</td>"
 		Response.Write("<TD bgcolor='#b8cce4' VALIGN=TOP>" & RSE("Nome") & "</TD>")
+		
+		
+		
+		Response.Write "<td bgcolor='#b8cce4'>" & RS("EstadoMatriz") & "</td>"
+		Response.Write "<td bgcolor='#b8cce4'>" & RS("Contato") & "</td>"
+		Response.Write "<td bgcolor='#b8cce4'>" & RS("Email") & "</td>"
+		Response.Write "<td bgcolor='#b8cce4'>" & RS("Telefone") & "</td>"
+		
+		Response.Write("<TD bgcolor='#b8cce4' VALIGN=TOP>" & RSE("Certificacao") & "</TD>")
 		
 		RSE.Close
 		Set RSE = Nothing
-		
-		Response.Write "<td bgcolor='#b8cce4'>" & RS("EstadoMatriz") & "</td>"
-		Response.Write "<td bgcolor='#b8cce4'>&nbsp;</td>"
-		Response.Write "<td bgcolor='#b8cce4'>" & RS("Contato") & "</td>"
-		Response.Write "<td bgcolor='#b8cce4'>" & RS("Email") & "</td>"
-		Response.Write "<td bgcolor='#b8cce4'>&nbsp;</td>"
 		Response.Write "<td bgcolor='#b8cce4'>" & RS("QtdeFuncionarios") & "</td>"
 		Response.Write "<td bgcolor='#b8cce4'>" & RS("EstadoMatriz") & "</td>"
 		Response.Write "<td bgcolor='#b8cce4'>" & RS("QtdeFiliais") & "</td>"
